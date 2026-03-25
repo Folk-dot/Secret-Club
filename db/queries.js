@@ -22,3 +22,5 @@ const getPosts=async () => {
     const {rows}=await pool.query("SELECT post_id,username,message,created_at FROM posts LEFT JOIN users USING(user_id)");
     return rows
 }
+
+module.exports={getUserData,insertUserData,updateRole,insertPost,getPosts};
