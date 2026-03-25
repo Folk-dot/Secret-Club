@@ -6,8 +6,14 @@ const getUserData=async(username)=>{
     return user;
 }
 
+const getUserById=async (id) => {
+    const {row}=await pool.query("SELECT * FROM users WHERE user_id=$1",[id]);
+    const user=row[0];
+    return user;
+}
+
 const insertUserData=async (fullname,username,hashedPass) => {
-    await pool.query("INSERT INTO users(fullname,username,password) VALUES($1,$2,$3)",[fullname,username,hashedPass]);
+    await pool.query("INSERT INTO users(fullname,username,password) VALUES($1,$2,$3) RETURNING *",[fullname,username,hashedPass]);
 }
 
 const updateRole=async (username,role) => {
@@ -23,4 +29,4 @@ const getPosts=async () => {
     return rows
 }
 
-module.exports={getUserData,insertUserData,updateRole,insertPost,getPosts};
+module.exports={getUserData,getUserById,insertUserData,updateRole,insertPost,getPosts};

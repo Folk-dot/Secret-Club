@@ -5,14 +5,25 @@ const bcrypt=require('bcryptjs');
 const getSignUp=async(req,res)=>{
         const error=validationResult(req);
         if(!error.isEmpty()){
-            return res.status(400).render('/sign-up',{error:error});
+            return res.status(400).render('sign-up-form',{errors:error.array()});
         }
         const {fullname,username,password}=matchedData(req);
-        const user=await db.getUserData(username);
-        if(user){
-            return res.render('/sign-up',{error:'This username has been used.'});
+        const dupUsername=await db.getUserData(username);
+        if(dupUsername){
+            return res.render('sign-up-form',{errors:[{ msg: 'This username has been used.' }]});
         }
-        const hashedPass=bcrypt.hash(password,10);
-        await db.insertUserData(fullname,username,hashedPass);
-        res.render('/log-in')
+        const hashedPass=await bcrypt.hash(password,10);
+        const user=await db.insertUserData(fullname,username,hashedPass);
+        req.login(user,(err)=>{
+            if(err){
+                return err;
+            }
+            return res.redirect('/')
+        })
 }
+
+const redirectSignUp=(req,res)=>{
+    return res.render('sign-up-form')
+}
+
+module.exports={getSignUp,redirectSignUp};

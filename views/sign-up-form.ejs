@@ -5,7 +5,8 @@
     </head>
     <body>
         <h1>Create an account</h1>
-        <form action="/sign-up" method="post">
+        <%- include('error') %>
+        <form action="/sign-up" method="POST">
             <h2>Please input information</h2>
             <label for="fullname">Full-name: <input id="fullname" name="fullname" type="text"></label>
             <label for="username">Username: <input id="username" name="username" type="email"></label>
