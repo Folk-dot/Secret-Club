@@ -4,7 +4,9 @@
         <title></title>
     </head>
     <body>
-        <p>Username: <%= user.username %>, Status: <%= user.role %></p>
+        <% if(user){ %>
+            <p>Username: <%= user.username %>, (<%= user.role %>)</p>
+        <% } %>
         <h1>Homepage</h1>
         <% if(user?.role === 'member' || user?.role === 'admin'){ %>
             <a href='/create'>Create a post</a>
