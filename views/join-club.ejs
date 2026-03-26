@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Join Club</title>
     </head> 
     <body>
         <h1>Enter our secret passcode</h1>
+        <%- include('/partial/error.ejs') %>
         <form action="/join-club" method="post">
             <label for="passcode">
                 <input id="passcode" name="passcode" type="password" pattern="\d{6}" maxlength="6" required>

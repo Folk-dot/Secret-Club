@@ -16,7 +16,7 @@ const getSignUp=async(req,res)=>{
         const user=await db.insertUserData(fullname,username,hashedPass);
         req.login(user,(err)=>{
             if(err){
-                return err;
+                return next(new Error('Not authenticated'));
             }
             return res.redirect('/')
         })

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login Page</title>
+        <title>Signin Page</title>
     </head>
     <body>
         <h1>Create an account</h1>
-        <%- include('error') %>
+        <%- include('/partial/error.ejs') %>
         <form action="/sign-up" method="POST">
             <h2>Please input information</h2>
             <label for="fullname">Full-name: <input id="fullname" name="fullname" type="text"></label>

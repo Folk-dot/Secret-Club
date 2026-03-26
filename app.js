@@ -14,9 +14,9 @@ const app=express();
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
-app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
-app.use(passport.session());
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/',indexRouter);
@@ -26,6 +26,11 @@ app.use('/log-out',logOutRouter);
 app.use('/join-club',joinClubRouter);
 app.use('/create',createPostRouter);
 app.use('/delete',deleteRouter);
+app.use((err,req,res,next)=>{
+    console.log(err);
+    res.status(err.status||500);
+    res.render('errors',{message:err.message,status:err.status});
+})
 
 const PORT=process.env.PORT
 app.listen(PORT,(err)=>{
