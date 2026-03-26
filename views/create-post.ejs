@@ -5,6 +5,7 @@
     </head>
     <body>
         <h1>New post</h1>
+        <%- include('partial/error.ejs') %>   
         <form action="/create" method="post">
             <label for="message">
                 <textarea type="text" id="message" name="message" placeholder="Please type something..."></textarea>
