@@ -13,7 +13,9 @@ const getUserById=async (id) => {
 }
 
 const insertUserData=async (fullname,username,hashedPass) => {
-    await pool.query("INSERT INTO users(fullname,username,password) VALUES($1,$2,$3) RETURNING *",[fullname,username,hashedPass]);
+    const {rows}=await pool.query("INSERT INTO users(fullname,username,password) VALUES($1,$2,$3) RETURNING *",[fullname,username,hashedPass]);
+    const user=rows[0];
+    return user;
 }
 
 const updateRole=async (username,role) => {

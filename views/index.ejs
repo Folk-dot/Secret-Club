@@ -4,12 +4,36 @@
         <title></title>
     </head>
     <body>
-        <h1>Homepage</h1>       
+        <p>Username: <%= user.username %>, Status: <%= user.role %></p>
+        <h1>Homepage</h1>
+        <% if(user?.role === 'member' || user?.role === 'admin'){ %>
+            <a href='/create'>Create a post</a>
+        <% }else if(user?.role==='user'){ %>
+            <a href='/join-club'>Join the club</a>
+        <% }else{ %>
+            <a href='/sign-up'>Sign in</a>
+            <a href="/log-in">Log in</a>
+        <% } %>       
         <% posts.forEach(post=>{ %>
             <article>
-                <p>User: <%= post.username %></p>
-                <p><%= post.message %></p>
-                <date>post at: <%= post.created_at.toLocaleString() %></date>
+                <p>User: <strong><%= post.username %> </strong>
+                    <span>- <%= post.created_at.toLocaleString('en-GB', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                        }) %>
+                    </span>
+                </p>
+                <p>
+                    <% if (user?.role === 'member' || user?.role === 'admin') { %>
+                        <%= post.message %>
+                    <% } else { %>
+                        This post is being hidden. Only members can see it!.
+                    <% } %>
+                </p>
                 <% if(user?.role==='admin'){ %>
                     <form action='/<%= post.post_id %>/delete' method='post'>
                         <button type="submit">Delete</button>
