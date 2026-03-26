@@ -7,8 +7,8 @@ const getUserData=async(username)=>{
 }
 
 const getUserById=async (id) => {
-    const {row}=await pool.query("SELECT * FROM users WHERE user_id=$1",[id]);
-    const user=row[0];
+    const {rows}=await pool.query("SELECT * FROM users WHERE user_id=$1",[id]);
+    const user=rows[0];
     return user;
 }
 

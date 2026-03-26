@@ -1,9 +1,8 @@
 const {Router}=require('express');
 const logInRouter=Router();
-const db=require('../db/queries');
+const {redirectLogIn,getLogIn}=require('../controller/logInController');
 
-logInRouter.get('/',(req,res)=>{
-    return res.render('log-in-form')
-})
+logInRouter.get('/',redirectLogIn);
+logInRouter.post('/',getLogIn);
 
 module.exports=logInRouter;
