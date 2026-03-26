@@ -5,7 +5,7 @@
     </head>
     <body>
         <% if(user){ %>
-            <p>Username: <%= user.username %>, (<%= user.role %>)</p>
+            <p>Username: <%= user.username %>, (<%= user.role %>) <a href="/log-out">Log out</a></p>
         <% } %>
         <h1>Homepage</h1>
         <% if(user?.role === 'member' || user?.role === 'admin'){ %>

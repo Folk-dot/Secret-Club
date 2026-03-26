@@ -5,6 +5,7 @@ const signUpRouter=require('./routes/sign-up-router');
 const logInRouter=require('./routes/log-in-router');
 const indexRouter=require('./routes/index-router');
 const joinClubRouter=require('./routes/join-club-router');
+const logOutRouter=require('./routes/log-out-router');
 const passport=require('./config/passport');
 const session=require('express-session');
 const app=express();
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/',indexRouter);
 app.use('/sign-up',signUpRouter);
 app.use('/log-in',logInRouter);
+app.use('/log-out',logOutRouter);
 app.use('/join-club',joinClubRouter);
 
 const PORT=process.env.PORT
