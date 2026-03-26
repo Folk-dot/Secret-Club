@@ -4,6 +4,18 @@
         <title></title>
     </head>
     <body>
-        
+        <h1>Homepage</h1>       
+        <% posts.forEach(post=>{ %>
+            <article>
+                <p>User: <%= post.username %></p>
+                <p><%= post.message %></p>
+                <date>post at: <%= post.created_at.toLocaleString() %></date>
+                <% if(user?.role==='admin'){ %>
+                    <form action='/<%= post.post_id %>/delete' method='post'>
+                        <button type="submit">Delete</button>
+                    </form>
+                <% } %>
+            </article>
+        <% }) %>
     </body>
 </html>
