@@ -31,4 +31,8 @@ const getPosts=async () => {
     return rows
 }
 
-module.exports={getUserData,getUserById,insertUserData,updateRole,insertPost,getPosts};
+const deletePost=async(post_id)=>{
+    await pool.query("DELETE FROM posts WHERE post_id=$1",[post_id]);
+} 
+
+module.exports={getUserData,getUserById,insertUserData,updateRole,insertPost,getPosts,deletePost};

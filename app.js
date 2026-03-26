@@ -7,6 +7,7 @@ const indexRouter=require('./routes/index-router');
 const joinClubRouter=require('./routes/join-club-router');
 const logOutRouter=require('./routes/log-out-router');
 const createPostRouter=require('./routes/create-post-router');
+const deleteRouter=require('./routes/delete-post-router');
 const passport=require('./config/passport');
 const session=require('express-session');
 const app=express();
@@ -24,6 +25,7 @@ app.use('/log-in',logInRouter);
 app.use('/log-out',logOutRouter);
 app.use('/join-club',joinClubRouter);
 app.use('/create',createPostRouter);
+app.use('/delete',deleteRouter);
 
 const PORT=process.env.PORT
 app.listen(PORT,(err)=>{
